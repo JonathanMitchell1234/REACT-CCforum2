@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import ThreadDisplay from './ThreadDisplay/components/ThreadDisplay';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    const config =
+    {
+      PutYouOwn: 'firebaseConfigInHere'
+    };
+
+    this.app = firebase.initializeApp(config);
+    this.database = this.app.database();
+  }
+
+  render() {
+    return (
+      <ThreadDisplay database={this.database} />
+    );
+  }
 }
 
 export default App;
